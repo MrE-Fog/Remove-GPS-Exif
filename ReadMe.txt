@@ -9,8 +9,6 @@ PowerShell プロンプトで以下コマンド入力すると、Jpeg の GPS �
 
 SetNormalPositionExif ファイルPath
 
-2017/6 とか年月を渡すと、その月の Windows Update 日を返します。
-
 ■ セットの仕方
 PowerShell プロンプトで install.ps1 を実行してください
 
