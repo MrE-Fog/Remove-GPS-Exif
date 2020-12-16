@@ -9,6 +9,10 @@ PowerShell プロンプトで以下コマンド入力すると、Jpeg の GPS �
 
 SetNormalPositionExif ファイルPath
 
+1ファイルづつしか処理しないので、ディレクトリ配下にある複数の .jpg を処理したい場合は、パイプを使って以下のようにしてください
+
+Get-ChildItem C:\Test\*.jpg | % { RemoveGPSExif $_.FullName }
+
 ■ セットの仕方
 PowerShell プロンプトで install.ps1 を実行してください
 
@@ -19,7 +23,7 @@ uninstall.ps1 を実行して下さい
 On Windows
 	5.1
 	6.2.1
-	7.0.0-preview.5
+	7.1.0
 
 ■ Web サイト
 Jpeg ファイルの GPS Exif を PowerShell で削除する
