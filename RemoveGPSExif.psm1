@@ -29,20 +29,18 @@ function RemoveGPSExif( $JpegFile ){
 	Add-Type -AssemblyName System.Drawing
 
 	# Jpeg 読み込み
-	$bmp = New-Object System.Drawing.Bitmap($JpegFileFullName)
+	$bmp = [System.Drawing.Bitmap]::new($JpegFileFullName)
 
-	# Exif を処理
-	$Index = $bmp.PropertyItems.Length
-	for ( $i = 0; $i -lt $Index; $i++ ){
-		$Item = $bmp.PropertyItems[$i]
-		$ID = $Item.Id
-
-		# GPS Exif を潰す(Exif 2.3 で 31 まで使っているけど念のため広めのレンジを指定)
-		if( $id -le 99 ){
-			$Item.Len = 0
-			$Item.Value = $null
-			$bmp.SetPropertyItem($Item)
+	# GPS Exif を潰す(Exif 2.3 で 0 - 31 まで使っている)
+	for( $Index = 0; $Index -le 31; $Index++){
+		try{
+			[void]$bmp.GetPropertyItem($Index)
 		}
+		catch{
+			continue
+		}
+
+		$bmp.RemovePropertyItem($Index)
 	}
 
 	# ファイル出力
